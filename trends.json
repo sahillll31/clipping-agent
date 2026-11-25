@@ -1,0 +1,105 @@
+{
+  "version": 2,
+  "updated": "2026-11",
+  "notes": "Edit freely - the analyzer scores every clip against these patterns. No internet calls are made.",
+  "hook_patterns": [
+    "POV:",
+    "Nobody talks about",
+    "Nobody tells you this",
+    "Here is why",
+    "The truth about",
+    "Stop doing this",
+    "You are doing this wrong",
+    "I wish I knew this sooner",
+    "This changed everything",
+    "Watch until the end",
+    "Most people get this wrong",
+    "3 things",
+    "The biggest mistake",
+    "What nobody tells you",
+    "It took me years to learn",
+    "Do not make this mistake",
+    "This is why you are stuck",
+    "If you only do one thing"
+  ],
+  "viral_keywords": [
+    "secret", "truth", "mistake", "wrong", "never", "always", "actually", "insane", "crazy",
+    "shocking", "brutal", "huge", "massive", "free", "easy", "fast", "instantly", "literally",
+    "nobody", "everyone", "most people", "turns out", "here is why", "because", "but",
+    "problem", "solution", "hack", "trick", "trap", "warning", "regret", "rich", "broke",
+    "money", "viral", "growth", "stop", "start", "imagine", "proof", "results", "exposed",
+    "lie", "myth", "scam", "underrated", "overrated", "worst", "best", "first", "last",
+    "hate", "love", "afraid", "scared", "obsessed", "addicted", "failed", "won", "lost"
+  ],
+  "curiosity_markers": [
+    "but", "however", "turns out", "until", "the reason", "here is why", "that is why",
+    "what happened", "the problem is", "the trick is", "the catch", "and then", "suddenly",
+    "except", "unless", "instead"
+  ],
+  "cta": [
+    "Follow for more.",
+    "Save this one.",
+    "Comment your take.",
+    "Share this with someone who needs it.",
+    "Which one surprised you?"
+  ],
+  "title_templates": [
+    "{hook}",
+    "The {topic} nobody talks about",
+    "Why most people get {topic} wrong",
+    "This {topic} tip changed everything",
+    "{hook} (here is how)"
+  ],
+  "niches": {
+    "tech": {
+      "label": "Tech & AI",
+      "keywords": ["ai", "app", "software", "code", "coding", "developer", "laptop", "iphone", "android", "gpu", "model", "chatgpt", "automation", "tech", "computer", "internet", "startup", "saas", "api", "data"],
+      "hashtags": ["#tech", "#ai", "#technology", "#techtok", "#software", "#coding", "#gadgets"]
+    },
+    "business": {
+      "label": "Business & Startup",
+      "keywords": ["business", "startup", "founder", "customer", "sales", "marketing", "brand", "product", "revenue", "client", "agency", "entrepreneur", "company", "growth", "hire", "team", "pricing", "offer"],
+      "hashtags": ["#business", "#startup", "#entrepreneur", "#marketing", "#smallbusiness", "#founder"]
+    },
+    "finance": {
+      "label": "Money & Finance",
+      "keywords": ["money", "invest", "investing", "stock", "stocks", "crypto", "bitcoin", "income", "salary", "debt", "savings", "rich", "wealth", "tax", "budget", "profit", "cash", "loan", "credit"],
+      "hashtags": ["#money", "#finance", "#investing", "#wealth", "#personalfinance", "#sidehustle"]
+    },
+    "fitness": {
+      "label": "Fitness & Health",
+      "keywords": ["workout", "gym", "muscle", "fat", "weight", "diet", "protein", "calories", "training", "exercise", "cardio", "strength", "body", "health", "sleep", "recovery", "running", "abs"],
+      "hashtags": ["#fitness", "#gym", "#workout", "#health", "#training", "#fatloss"]
+    },
+    "motivation": {
+      "label": "Motivation & Mindset",
+      "keywords": ["mindset", "discipline", "habit", "habits", "goal", "goals", "focus", "success", "failure", "motivation", "confidence", "fear", "procrastination", "consistency", "growth", "purpose", "life"],
+      "hashtags": ["#motivation", "#mindset", "#discipline", "#success", "#selfimprovement", "#habits"]
+    },
+    "comedy": {
+      "label": "Comedy & Entertainment",
+      "keywords": ["funny", "joke", "laugh", "comedy", "hilarious", "meme", "prank", "story", "drama", "reaction", "wild", "insane", "wait", "bro"],
+      "hashtags": ["#funny", "#comedy", "#humor", "#memes", "#fyp", "#viral"]
+    },
+    "education": {
+      "label": "Education & Explainer",
+      "keywords": ["learn", "explain", "science", "history", "study", "school", "college", "exam", "math", "physics", "biology", "psychology", "fact", "facts", "research", "theory", "how"],
+      "hashtags": ["#learn", "#education", "#didyouknow", "#facts", "#explained", "#science"]
+    },
+    "gaming": {
+      "label": "Gaming",
+      "keywords": ["game", "gaming", "player", "stream", "fps", "console", "playstation", "xbox", "nintendo", "level", "boss", "speedrun", "clutch", "rank", "meta"],
+      "hashtags": ["#gaming", "#gamer", "#gameplay", "#twitch", "#esports", "#clips"]
+    },
+    "lifestyle": {
+      "label": "Lifestyle & Vlog",
+      "keywords": ["day", "routine", "vlog", "travel", "food", "recipe", "fashion", "style", "home", "room", "morning", "night", "aesthetic", "life", "city", "coffee"],
+      "hashtags": ["#lifestyle", "#vlog", "#dayinmylife", "#aesthetic", "#travel", "#food"]
+    },
+    "generic": {
+      "label": "General",
+      "keywords": [],
+      "hashtags": ["#viral", "#fyp", "#trending", "#shorts", "#reels", "#clips"]
+    }
+  }
+}

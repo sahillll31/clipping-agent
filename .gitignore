@@ -1,0 +1,21 @@
+# --- python / backend ---
+.venv/
+__pycache__/
+*.pyc
+config.json
+data/
+bin/
+models/
+assets/fonts/
+*.part
+
+# --- web ---
+web/node_modules/
+web/dist/
+web/.vite/
+
+# --- os / editors ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

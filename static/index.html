@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ClipForge — YouTube to trend-ready shorts</title>
+<meta name="description" content="Turn any YouTube video into automatic vertical clips with captions, powered by local models." />
+<link rel="stylesheet" href="/styles.css" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✂️</text></svg>" />
+</head>
+<body>
+<div class="bg-glow"></div>
+
+<header class="topbar">
+  <a class="brand" href="/">
+    <span class="brand-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+        <path d="M20 4 8.12 15.88M14.47 14.48 20 20M8.12 8.12 12 12"/>
+      </svg>
+    </span>
+    <span class="brand-text">
+      <strong>ClipForge</strong>
+      <small>local · trend-aware · automatic</small>
+    </span>
+  </a>
+  <div class="health" id="health"></div>
+  <button class="icon-btn" id="settingsBtn" title="Settings" aria-label="Settings">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+      <circle cx="12" cy="12" r="3"/>
+      <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 9 19.4a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.55V3a2 2 0 1 1 4 0v.09A1.7 1.7 0 0 0 15 4.6a1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9v.09a1.7 1.7 0 0 0 1.55 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.51 1Z"/>
+    </svg>
+  </button>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-copy">
+      <span class="kicker">yt-dlp → whisper.cpp → ffmpeg</span>
+      <h1>Turn long videos into <em>clips that hit</em>.</h1>
+      <p class="lede">
+        Paste a YouTube link. ClipForge transcribes it locally, scores every moment against
+        current short-form hook patterns, then cuts vertical 9:16 clips with word-by-word captions.
+      </p>
+    </div>
+
+    <form class="composer" id="composer" autocomplete="off">
+      <div class="url-row">
+        <span class="url-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 13a5 5 0 0 0 7.07 0l1.42-1.41a5 5 0 0 0-7.07-7.07L10 5.94"/>
+            <path d="M14 11a5 5 0 0 0-7.07 0L5.5 12.42a5 5 0 0 0 7.07 7.07L14 18.06"/>
+          </svg>
+        </span>
+        <input id="url" name="url" type="url" placeholder="https://youtube.com/watch?v=..." spellcheck="false" required />
+        <button type="button" class="ghost-btn" id="pasteBtn">Paste</button>
+        <button type="submit" class="primary-btn" id="forgeBtn">
+          <span class="spinner" hidden></span>
+          <span>Forge clips</span>
+        </button>
+      </div>
+
+      <div class="options">
+        <label class="field">
+          <span>Niche</span>
+          <select id="niche">
+            <option value="auto">Auto-detect</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Clips</span>
+          <select id="clips">
+            <option>3</option><option selected>5</option><option>8</option><option>10</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Target length</span>
+          <select id="length">
+            <option value="25">25s</option>
+            <option value="35">35s</option>
+            <option value="45" selected>45s</option>
+            <option value="60">60s</option>
+          </select>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="captions" checked />
+          <span class="track"></span><span>Karaoke captions</span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="hook" checked />
+          <span class="track"></span><span>Hook header</span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="llm" checked />
+          <span class="track"></span><span>Local LLM ranking</span>
+        </label>
+      </div>
+      <p class="hint" id="composerHint">Everything runs on this machine — no uploads, no paid APIs.</p>
+    </form>
+
+    <div class="notice" id="setupNotice" hidden>
+      <div>
+        <strong>Toolchain missing.</strong>
+        <span id="setupDetail"></span>
+      </div>
+      <code>.\setup.ps1</code>
+    </div>
+  </section>
+
+  <section class="jobs-section">
+    <div class="section-head">
+      <h2>Jobs</h2>
+      <span class="queue-badge" id="queueBadge" hidden></span>
+    </div>
+    <div id="jobs" class="jobs"></div>
+
+    <div class="empty" id="empty">
+      <div class="empty-steps">
+        <div class="step"><b>1</b><h3>Paste a link</h3><p>Any public YouTube video, podcast or stream.</p></div>
+        <div class="step"><b>2</b><h3>Local transcription</h3><p>whisper.cpp on your GPU/CPU — audio never leaves the machine.</p></div>
+        <div class="step"><b>3</b><h3>Trend scored</h3><p>Hook, emotion, curiosity and audio energy decide the moments.</p></div>
+        <div class="step"><b>4</b><h3>Export 9:16</h3><p>Vertical clips with karaoke captions, hook header and hashtags.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
+<aside class="drawer" id="drawer" hidden>
+  <div class="drawer-head">
+    <h2>Settings</h2>
+    <button class="icon-btn" id="drawerClose" aria-label="Close">✕</button>
+  </div>
+  <div class="drawer-body">
+    <label class="field block">
+      <span>Whisper model</span>
+      <select id="setModel"></select>
+      <small>Bigger models are more accurate but slower. `.en` models are English-only.</small>
+    </label>
+    <label class="field block">
+      <span>Compute device</span>
+      <select id="setDevice">
+        <option value="auto">Auto</option>
+        <option value="cpu">CPU</option>
+        <option value="cuda">CUDA (if installed)</option>
+      </select>
+    </label>
+    <label class="field block">
+      <span>Parallel jobs</span>
+      <select id="setWorkers">
+        <option value="1">1 (recommended)</option>
+        <option value="2">2</option>
+      </select>
+    </label>
+    <label class="switch block">
+      <input type="checkbox" id="setKeep" />
+      <span class="track"></span><span>Keep source video after rendering</span>
+    </label>
+    <div class="divider"></div>
+    <label class="switch block">
+      <input type="checkbox" id="setLlm" />
+      <span class="track"></span><span>Use Ollama for moment ranking</span>
+    </label>
+    <label class="field block">
+      <span>Ollama model</span>
+      <input id="setLlmModel" type="text" placeholder="qwen2.5:3b" />
+      <small id="llmStatusLine">Checking Ollama…</small>
+    </label>
+    <div class="divider"></div>
+    <div class="stat-grid" id="statGrid"></div>
+    <button class="primary-btn wide" id="saveSettings">Save settings</button>
+  </div>
+</aside>
+
+<div class="toast" id="toast"></div>
+<template id="jobTemplate">
+  <article class="job">
+    <div class="job-head">
+      <div class="job-thumb"><img alt="" loading="lazy" /></div>
+      <div class="job-meta">
+        <div class="job-title-row">
+          <h3 class="job-title">Untitled</h3>
+          <span class="pill stage-pill">queued</span>
+        </div>
+        <p class="job-sub"></p>
+        <div class="bar-row">
+          <div class="bar"><i></i></div>
+          <span class="pct">0%</span>
+        </div>
+        <p class="job-msg">Waiting…</p>
+      </div>
+      <div class="job-actions">
+        <a class="icon-btn open-src" target="_blank" rel="noreferrer" title="Open source" hidden>↗</a>
+        <button class="icon-btn cancel-btn" title="Cancel">✕</button>
+        <button class="icon-btn delete-btn" title="Remove" hidden>🗑</button>
+      </div>
+    </div>
+    <ol class="stages"></ol>
+    <details class="log"><summary>Run log</summary><pre></pre></details>
+    <div class="clips"></div>
+  </article>
+</template>
+
+<template id="clipTemplate">
+  <article class="clip">
+    <div class="clip-video">
+      <video muted loop playsinline preload="metadata" controls></video>
+      <span class="score-badge">0</span>
+      <span class="clip-time">0:00–0:00</span>
+    </div>
+    <div class="clip-body">
+      <h4 class="clip-title"></h4>
+      <p class="clip-hook"></p>
+      <p class="clip-caption"></p>
+      <div class="tags"></div>
+      <div class="clip-actions">
+        <a class="dl">Download</a>
+        <button class="copy">Copy caption</button>
+      </div>
+    </div>
+  </article>
+</template>
+
+<script src="/app.js"></script>
+</body>
+</html>
